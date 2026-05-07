@@ -28,5 +28,11 @@
   },
   "host_permissions": [
     "http://localhost/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["buffett-indicator.pdf"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

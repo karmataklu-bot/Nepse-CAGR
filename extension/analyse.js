@@ -1,5 +1,8 @@
     // ── Page switching ──
+    let prevPage = 'analyse';
     function switchPage(name) {
+      const current = document.querySelector('.page.active');
+      if (current) prevPage = current.id.replace('page-', '');
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
       document.getElementById('analyse-menu').classList.remove('open');
@@ -10,7 +13,7 @@
 
     // ── Back button ──
     document.getElementById('back-btn').addEventListener('click', () => {
-      switchPage('analyse');
+      switchPage(prevPage === 'analyse' ? 'analyse' : prevPage);
     });
 
     // ── Dropdown ──
@@ -35,6 +38,10 @@
     document.getElementById('menu-cagr').addEventListener('click', (e) => {
       e.stopPropagation();
       switchPage('cagr');
+    });
+    document.getElementById('buffett-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      switchPage('buffett');
     });
     document.addEventListener('click', () => {
       document.getElementById('analyse-menu').classList.remove('open');
