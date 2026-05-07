@@ -494,8 +494,13 @@
   <!-- ══ BULL & BEAR PAGE ══ -->
   <div class="page" id="page-bullbear">
     <div class="bb-page">
-      <div class="bb-title">NEPSE Bull &amp; Bear Cycles</div>
-      <div class="bb-sub">Historical market cycles from 2000 to today · Data: ShareSansar</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div>
+          <div class="bb-title">NEPSE Bull &amp; Bear Cycles</div>
+          <div class="bb-sub">Historical market cycles from 2000 to today · Data: ShareSansar</div>
+        </div>
+        <input type="text" id="bb-stock-input" placeholder="Company name or ticker" style="background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 16px;font-size:13px;outline:none;width:240px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
 
       <div class="bb-legend">
         <div class="bb-legend-item"><div class="legend-line" style="background:#4ecdc4"></div> NEPSE Index</div>
@@ -538,6 +543,29 @@
               <tr><td>4</td><td>2022-09-25</td><td class="val-bear">1,815.13</td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:16px;padding:24px 28px;">
+        <div style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">🎯 My Predictions — Next Cycle Top</div>
+        <div style="font-size:13px;color:var(--label);margin-bottom:14px;">Watch for when <strong style="color:var(--text)">one or more</strong> of the following becomes true:</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--text);">
+            <span style="color:var(--accent);font-weight:700;min-width:20px;">1.</span>
+            <span>Market cap of NEPSE equals GDP — <span style="color:var(--label)">Buffett Indicator hits 100%</span></span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--text);">
+            <span style="color:var(--accent);font-weight:700;min-width:20px;">2.</span>
+            <span>Daily trading volume approaches <span style="color:var(--label)">35–40 Arab</span></span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--text);">
+            <span style="color:var(--accent);font-weight:700;min-width:20px;">3.</span>
+            <span>Index crosses <span style="color:var(--label)">5,000</span></span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--text);">
+            <span style="color:var(--accent);font-weight:700;min-width:20px;">4.</span>
+            <span>Time approaches <span style="color:var(--label)">4 years from last bottom</span> (last bottom: Sep 2022 → ~Sep 2026)</span>
+          </div>
         </div>
       </div>
     </div>
