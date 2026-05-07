@@ -1,8 +1,6 @@
     // ── Page switching ──
-    let prevPage = 'analyse';
+    const backDestination = { buffett: 'bullbear' };
     function switchPage(name) {
-      const current = document.querySelector('.page.active');
-      if (current) prevPage = current.id.replace('page-', '');
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
       document.getElementById('analyse-menu').classList.remove('open');
@@ -13,7 +11,8 @@
 
     // ── Back button ──
     document.getElementById('back-btn').addEventListener('click', () => {
-      switchPage(prevPage === 'analyse' ? 'analyse' : prevPage);
+      const current = document.querySelector('.page.active').id.replace('page-', '');
+      switchPage(backDestination[current] || 'analyse');
     });
 
     // ── Dropdown ──
