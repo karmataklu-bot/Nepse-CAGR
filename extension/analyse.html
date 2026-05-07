@@ -495,7 +495,7 @@
         <div class="bb-legend-item"><div class="legend-line" style="background:#4ecdc4"></div> NEPSE Index</div>
         <div class="bb-legend-item"><div class="legend-line" style="background:rgba(78,205,196,0.5);border-top:2px dashed rgba(78,205,196,0.5)"></div> Estimated (1994–2000)</div>
         <div class="bb-legend-item"><div class="legend-dot" style="background:#4ecdc4"></div> Bull top</div>
-        <div class="bb-legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Bear bottom</div>
+        <div class="bb-legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Bear bottom <span style="font-size:10px;color:var(--label);margin-left:2px">* Closing price</span></div>
       </div>
 
       <div class="chart-card">
@@ -542,7 +542,6 @@
     <div class="hero">
       <div class="hero-title">CAGR Calculator</div>
 
-<<<<<<< HEAD
       <div class="search-wrap">
         <div class="search-box">
           <span class="search-icon">📊</span>
@@ -550,43 +549,6 @@
           <button class="search-btn" id="cagr-btn">Calculate</button>
         </div>
       </div>
-=======
-    // ── Page switching ──
-    let currentPage = 'analyse';
-    function switchPage(page) {
-      currentPage = page;
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const el = document.getElementById('page-' + page);
-      if (el) el.classList.add('active');
-
-      // Dim back button on main analyse page
-      const backBtn = document.getElementById('back-btn');
-      backBtn.style.opacity = (page === 'analyse') ? '0.4' : '1';
-      backBtn.disabled = (page === 'analyse');
-    }
-
-    // ── Back button ──
-    document.getElementById('back-btn').onclick = () => {
-      switchPage('analyse');
-    };
-
-    // ── Period toggle ──
-    let useYears = true;
-    document.getElementById('opt-years-btn').onclick = () => {
-      useYears = true;
-      document.getElementById('opt-years-btn').classList.add('active');
-      document.getElementById('opt-date-btn').classList.remove('active');
-      document.getElementById('years-opt').style.display = '';
-      document.getElementById('date-opt').style.display = 'none';
-    };
-    document.getElementById('opt-date-btn').onclick = () => {
-      useYears = false;
-      document.getElementById('opt-date-btn').classList.add('active');
-      document.getElementById('opt-years-btn').classList.remove('active');
-      document.getElementById('years-opt').style.display = 'none';
-      document.getElementById('date-opt').style.display = '';
-    };
->>>>>>> claude/optimistic-margulis-0ef6ce
 
       <div class="options-row">
         <div class="opt-group">
