@@ -60,7 +60,12 @@
       color: var(--text);
     }
     .topbar-brand img { width: 28px; height: 28px; border-radius: 6px; }
-    .theme-btn {
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .theme-btn, .back-btn {
       background: none;
       border: 1px solid var(--border);
       color: var(--text);
@@ -70,7 +75,7 @@
       font-size: 13px;
       transition: background 0.2s;
     }
-    .theme-btn:hover { background: var(--card); }
+    .theme-btn:hover, .back-btn:hover { background: var(--card); }
 
     /* ── Hero search area ── */
     .hero {
@@ -326,7 +331,10 @@
       <img src="icons/icon48.png" alt="NEPSE">
       NEPSE Stock Analyser
     </div>
-    <button class="theme-btn" id="theme-btn">☀️ Light Mode</button>
+    <div class="topbar-right">
+      <button class="back-btn" id="back-btn" style="display: none;">← Back</button>
+      <button class="theme-btn" id="theme-btn">☀️ Light Mode</button>
+    </div>
   </div>
 
   <div class="hero">
@@ -429,6 +437,24 @@
       isDark = !isDark;
       document.body.classList.toggle('light', !isDark);
       document.getElementById('theme-btn').textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    };
+
+    // ── Page switching ──
+    let currentPage = 'analyse';
+    function switchPage(page) {
+      currentPage = page;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById('page-' + page);
+      if (el) el.classList.add('active');
+
+      // Show back button on non-analyse pages
+      const backBtn = document.getElementById('back-btn');
+      backBtn.style.display = (page === 'analyse') ? 'none' : 'flex';
+    }
+
+    // ── Back button ──
+    document.getElementById('back-btn').onclick = () => {
+      switchPage('analyse');
     };
 
     // ── Period toggle ──
