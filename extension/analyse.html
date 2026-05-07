@@ -338,6 +338,18 @@
       margin-bottom: 4px;
     }
     .bb-sub { font-size: 13px; color: var(--label); margin-bottom: 28px; }
+    .bb-note {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--label);
+      line-height: 1.5;
+    }
+    .bb-note strong { color: var(--text); }
 
     /* Legend */
     .bb-legend {
@@ -484,7 +496,7 @@
   <div class="page" id="page-bullbear">
     <div class="bb-page">
       <div class="bb-title">NEPSE Bull &amp; Bear Cycles</div>
-      <div class="bb-sub">Historical market cycles from 2011 to today · Data: ShareSansar</div>
+      <div class="bb-sub">Historical market cycles from 2000 to today · Data: ShareSansar</div>
 
       <div class="bb-legend">
         <div class="bb-legend-item"><div class="legend-line" style="background:#4ecdc4"></div> NEPSE Index</div>
@@ -494,8 +506,11 @@
 
       <div class="chart-card">
         <div class="chart-wrap">
-          <canvas id="bb-chart" role="img" aria-label="NEPSE Index bull and bear cycle chart from 2011 to 2026">NEPSE Index historical data showing bull tops and bear bottoms.</canvas>
+          <canvas id="bb-chart" role="img" aria-label="NEPSE Index bull and bear cycle chart from 2000 to 2026">NEPSE Index historical data showing bull tops and bear bottoms.</canvas>
         </div>
+      </div>
+      <div class="bb-note">
+        📌 NEPSE index started at <strong>100 points</strong> on <strong>13 Jan 1994</strong> (29 Poush 2050 BS) — the day NEPSE inaugurated its trading floor. Chart data begins from 2000.
       </div>
 
       <div class="bb-table-title">Key Cycle Turning Points</div>
