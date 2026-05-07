@@ -72,8 +72,12 @@
       color: var(--text);
     }
     .topbar-brand img { width: 28px; height: 28px; border-radius: 6px; }
-    .topbar-right { display: flex; align-items: center; gap: 12px; }
-    .theme-btn {
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .theme-btn, .back-btn {
       background: none;
       border: 1px solid var(--border);
       color: var(--text);
@@ -83,19 +87,8 @@
       font-size: 13px;
       transition: background 0.2s;
     }
-    .theme-btn:hover { background: var(--card); }
-    .back-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: background 0.2s;
-      display: none;
-    }
-    .back-btn:hover { background: var(--card); }
+    .theme-btn:hover, .back-btn:hover:not(:disabled) { background: var(--card); }
+    .back-btn:disabled { cursor: default; }
 
     /* ── Dropdown nav ── */
     .nav-dropdown {
@@ -549,6 +542,7 @@
     <div class="hero">
       <div class="hero-title">CAGR Calculator</div>
 
+<<<<<<< HEAD
       <div class="search-wrap">
         <div class="search-box">
           <span class="search-icon">📊</span>
@@ -556,6 +550,43 @@
           <button class="search-btn" id="cagr-btn">Calculate</button>
         </div>
       </div>
+=======
+    // ── Page switching ──
+    let currentPage = 'analyse';
+    function switchPage(page) {
+      currentPage = page;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const el = document.getElementById('page-' + page);
+      if (el) el.classList.add('active');
+
+      // Dim back button on main analyse page
+      const backBtn = document.getElementById('back-btn');
+      backBtn.style.opacity = (page === 'analyse') ? '0.4' : '1';
+      backBtn.disabled = (page === 'analyse');
+    }
+
+    // ── Back button ──
+    document.getElementById('back-btn').onclick = () => {
+      switchPage('analyse');
+    };
+
+    // ── Period toggle ──
+    let useYears = true;
+    document.getElementById('opt-years-btn').onclick = () => {
+      useYears = true;
+      document.getElementById('opt-years-btn').classList.add('active');
+      document.getElementById('opt-date-btn').classList.remove('active');
+      document.getElementById('years-opt').style.display = '';
+      document.getElementById('date-opt').style.display = 'none';
+    };
+    document.getElementById('opt-date-btn').onclick = () => {
+      useYears = false;
+      document.getElementById('opt-date-btn').classList.add('active');
+      document.getElementById('opt-years-btn').classList.remove('active');
+      document.getElementById('years-opt').style.display = 'none';
+      document.getElementById('date-opt').style.display = '';
+    };
+>>>>>>> claude/optimistic-margulis-0ef6ce
 
       <div class="options-row">
         <div class="opt-group">
