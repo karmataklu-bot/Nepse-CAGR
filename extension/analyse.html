@@ -406,7 +406,7 @@
       NEPSE Stock Analyser
     </div>
     <div class="topbar-right">
-      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀️ Light Mode</button>
+      <button class="theme-btn" id="theme-btn">☀️ Light Mode</button>
     </div>
   </div>
 
@@ -618,7 +618,6 @@
     let isDark = true;
     function toggleTheme() {
       isDark = !isDark;
-      alert('Theme clicked! isDark=' + isDark);
       if (isDark) {
         document.documentElement.classList.remove('light');
       } else {
