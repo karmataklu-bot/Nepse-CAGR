@@ -84,6 +84,18 @@
       transition: background 0.2s;
     }
     .theme-btn:hover { background: var(--card); }
+    .back-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+      display: none;
+    }
+    .back-btn:hover { background: var(--card); }
 
     /* ── Dropdown nav ── */
     .nav-dropdown {
@@ -406,6 +418,7 @@
       NEPSE Stock Analyser
     </div>
     <div class="topbar-right">
+      <button class="back-btn" id="back-btn">← Back</button>
       <button class="theme-btn" id="theme-btn">☀️ Light Mode</button>
     </div>
   </div>

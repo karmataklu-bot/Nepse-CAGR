@@ -4,8 +4,14 @@
       document.getElementById('page-' + name).classList.add('active');
       document.getElementById('analyse-menu').classList.remove('open');
       document.getElementById('analyse-trigger').classList.remove('open');
+      document.getElementById('back-btn').style.display = name === 'analyse' ? 'none' : 'inline-block';
       if (name === 'bullbear') buildChart();
     }
+
+    // ── Back button ──
+    document.getElementById('back-btn').addEventListener('click', () => {
+      switchPage('analyse');
+    });
 
     // ── Dropdown ──
     document.getElementById('analyse-trigger').addEventListener('click', (e) => {
