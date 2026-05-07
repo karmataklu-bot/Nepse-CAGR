@@ -75,7 +75,8 @@
       font-size: 13px;
       transition: background 0.2s;
     }
-    .theme-btn:hover, .back-btn:hover { background: var(--card); }
+    .theme-btn:hover, .back-btn:hover:not(:disabled) { background: var(--card); }
+    .back-btn:disabled { cursor: default; }
 
     /* ── Hero search area ── */
     .hero {
@@ -332,7 +333,7 @@
       NEPSE Stock Analyser
     </div>
     <div class="topbar-right">
-      <button class="back-btn" id="back-btn" style="display: none;">← Back</button>
+      <button class="back-btn" id="back-btn">← Back</button>
       <button class="theme-btn" id="theme-btn">☀️ Light Mode</button>
     </div>
   </div>
@@ -447,9 +448,10 @@
       const el = document.getElementById('page-' + page);
       if (el) el.classList.add('active');
 
-      // Show back button on non-analyse pages
+      // Dim back button on main analyse page
       const backBtn = document.getElementById('back-btn');
-      backBtn.style.display = (page === 'analyse') ? 'none' : 'flex';
+      backBtn.style.opacity = (page === 'analyse') ? '0.4' : '1';
+      backBtn.disabled = (page === 'analyse');
     }
 
     // ── Back button ──
