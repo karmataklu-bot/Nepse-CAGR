@@ -371,6 +371,30 @@ def _print_row(index_name, row, exact=True, requested=None):
 
 
 # ---------------------------------------------------------------------------
+# Interactive date prompt helper
+# ---------------------------------------------------------------------------
+
+def prompt_for_date():
+    """Ask user for a date interactively. Returns date string or None."""
+    print("\nWhat would you like to do?")
+    print("  1. Query data for a specific date")
+    print("  2. Scrape / update latest data")
+    choice = input("\nEnter 1 or 2: ").strip()
+
+    if choice == "1":
+        while True:
+            date_input = input("Enter date (YYYY-MM-DD), or press Enter for today: ").strip()
+            if not date_input:
+                return datetime.today().strftime("%Y-%m-%d")
+            try:
+                datetime.strptime(date_input, "%Y-%m-%d")
+                return date_input
+            except ValueError:
+                print("  [!] Invalid format. Please use YYYY-MM-DD (e.g. 2024-01-15)")
+    return None  # means scrape mode
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -407,6 +431,7 @@ def main():
     elif args.index:
         run_single(args.index, args.from_date, args.to_date, data_dir, incremental, debug=args.debug)
     else:
+        # ── Interactive mode ──────────────────────────────────────────────
         print("Available indices:")
         for i, name in enumerate(ALL_INDICES, 1):
             print(f"  {i:2}. {name}")
@@ -416,8 +441,15 @@ def main():
             index_name = ALL_INDICES[idx] if 0 <= idx < len(ALL_INDICES) else None
         else:
             index_name = choice
+
         if index_name:
-            run_single(index_name, args.from_date, args.to_date, data_dir, incremental, debug=args.debug)
+            date_input = prompt_for_date()
+            if date_input:
+                # Query mode
+                query_index(index_name, date_input, data_dir)
+            else:
+                # Scrape mode
+                run_single(index_name, args.from_date, args.to_date, data_dir, incremental, debug=args.debug)
 
 
 if __name__ == "__main__":
