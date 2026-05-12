@@ -58,4 +58,5 @@ htmlcov/
 # Temporary files
 .temp/
 .tmp/
-.cache/
+.cache/Research/**/*.xlsx
+Research/*.xlsx
