@@ -1,0 +1,234 @@
+#,Ticker,Name,Listing_Date,Window_End,Timeframe,Listing_Price,End_Price,Total_Return_%
+1,BBC,Bishal Bazar Company Limited,7/20/95,7/20/96,1 year,2220,3550,55.41
+2,CFCL,Central Finance Limited,4/4/03,4/4/04,1 year,140,120,-14.29
+3,BPCL,Butwal Power Company Limited,1/20/05,1/20/06,1 year,280,480,78.57
+4,CBBL,Chhimek Laghubitta Bittiya Sanstha Limited,2/9/05,2/9/06,1 year,115,100,-8.7
+5,DDBL,Deprosc Laghubitta Bittiya Sanstha Limited,6/14/05,6/14/06,1 year,120,110,-8.33
+6,CHCL,Chilime Hydro power Company Limited,6/13/06,6/13/07,1 year,281,860,206.05
+7,AHPC,Arun Valley Hydropower Development Company Limited,11/25/09,11/25/10,1 year,790,447,-43.42
+8,ALICL,Asian Life Insurance Company Limited,5/12/10,5/12/11,1 year,337,205,-39.17
+9,ADBL,Agricultural Development Bank Limited,9/2/10,9/2/11,1 year,255,125,-50.98
+10,MBL,Machhapuchchhre Bank Limited,3/20/11,3/20/12,1 year,153,117,-30.07
+11,EBL,Everest Bank Limited,3/20/11,3/20/12,1 year,984,695,-17.23
+12,GBBL,Garima Bikas Bank Limited,3/20/11,3/20/12,1 year,141,118,-3.55
+13,HBL,Himalayan Bank Limited,3/20/11,3/20/12,1 year,585,450,-4.81
+14,ICFC,ICFC Finance Limited,3/20/11,3/20/12,1 year,204,108,-40.45
+15,KBL,Kumari Bank Limited,3/20/11,3/20/12,1 year,270,170,-31.84
+16,LICN,Life Insurance Corporation Nepal Limited,3/20/11,3/20/12,1 year,620,567,-8.55
+17,NHPC,National Hydro Power Company Limited,3/20/11,3/20/12,1 year,41,45,14.63
+18,NABIL,Nabil Bank Limited,3/20/11,3/20/12,1 year,1170,874,-22.74
+19,NTC,Nepal Doorsanchar Company Limited,3/20/11,3/20/12,1 year,446,400,-0.22
+20,PCBL,Prime Commercial Bank Limited,3/20/11,3/20/12,1 year,248,170,-26.36
+21,SBI,Nepal SBI Bank Limited,3/20/11,3/20/12,1 year,560,427,-13.33
+22,SBL,Siddhartha Bank Limited,3/20/11,3/20/12,1 year,263,200,-16.81
+23,SCB,Standard Chartered Bank Nepal Limited,3/20/11,3/20/12,1 year,1770,1360,-20.34
+24,NMB,NMB Bank Limited,3/20/11,3/20/12,1 year,250,154,-34.8
+25,NFS,Nepal Finance Limited,3/24/11,3/24/12,1 year,195,134,-16.82
+26,SHL,Soaltee Hotel Limited,3/24/11,3/24/12,1 year,238,197,-18.49
+27,SWBBL,Swabalamban Laghubitta Bittiya Sanstha Limited,3/24/11,3/24/12,1 year,185,198,24.73
+28,NLIC,Nepal Life Insurance Company Limited,3/25/11,3/25/12,1 year,725,630,-13.1
+29,NIL,Neco Insurance Limited,3/25/11,3/25/12,1 year,118,100,0
+30,SICL,Shikhar Insurance Company Limited,3/25/11,3/25/12,1 year,301,249,-18.6
+31,NLICL,National Life Insurance Company Limited,3/25/11,3/25/12,1 year,307,314,2.28
+32,BNT,Bottlers Nepal Limited,3/25/11,3/25/12,1 year,745,1018,41.61
+33,OHL,Oriental Hotel Limited,3/28/11,3/28/12,1 year,100,75,-25
+34,TRH,Taragaon Regency Hotel Limited,3/28/11,3/28/12,1 year,85,78,-8.24
+35,UNL,Unilever Nepal Limited,3/28/11,3/28/12,1 year,5880,6032,2.59
+36,NUBL,Nirdhan Utthan Laghubitta Bittiya Sanstha Limited,4/6/11,4/6/12,1 year,225,178,-12.93
+37,CIT,Citizen Investment Trust,4/6/11,4/6/12,1 year,587,593,2.9
+38,BNL,Bottlers Nepal Limited,4/19/11,4/19/12,1 year,713,1680,144.74
+39,NICL,Nepal Insurance Company Limited,4/27/11,4/27/12,1 year,360,209,-47.22
+40,HDL,Himalayan Distillery Limited,10/24/11,10/24/12,1 year,100,98,0
+41,MNBBL,Muktinath Bikas Bank Limited,11/3/11,11/3/12,1 year,312,256,1.08
+42,STC,Salt Trading Corporation Limited,2/1/12,2/1/13,1 year,256,209,23.09
+43,SANIMA,Sanima Bank Limited,2/27/12,2/27/13,1 year,254,283,13.58
+44,FMDBL,First Microfinance Laghubitta Bittiya Sanstha Limited,6/10/12,6/10/13,1 year,141,145,14.74
+45,GBIME,Global IME Bank Limited,9/9/12,9/9/13,1 year,175,430,158.8
+46,NBL,Nepal Bank Limited,12/17/12,12/17/13,1 year,395,355,783.85
+47,SLBBL,Swarojgar Laghubitta Bittiya Sanstha Limited,6/19/13,6/19/14,1 year,153,1203,698.69
+48,NICA,NIC Asia Bank Limited,7/14/13,7/14/14,1 year,504,980,98.41
+49,NLG,NLG Insurance Company Limited,7/17/13,7/17/14,1 year,275,862,248.82
+50,SKBBL,Sana Kisan Bikas Laghubitta Bittiya Sanstha Limited,10/8/13,10/8/14,1 year,605,1405,168.94
+51,SHPC,Sanima Mai Hydropower Limited,1/22/14,1/22/15,1 year,324,783,141.67
+52,KMCDB,Kalika Laghubitta Bittiya Sanstha Limited,2/6/14,2/6/15,1 year,399,1000,151.88
+53,MLBBL,Mithila Laghubitta Bittiya Sanstha Limited,6/26/14,6/26/15,1 year,376,920,189.75
+54,LLBS,Laxmi Laghubitta Bittiya Sanstha Limited,10/14/14,10/14/15,1 year,307,944,207.49
+55,PRVU,Prabhu Bank Limited,1/4/15,1/4/16,1 year,227,438,82.82
+56,PRIN,Prabhu Insurance Company Limited,6/4/15,6/4/16,1 year,373,1127,257.32
+57,RBCL,Rastriya Beema Company Limited,6/22/15,6/22/16,1 year,5202,8132,48.89
+58,BARUN,Barun Hydropower Company Limited,10/15/15,10/15/16,1 year,304,400,32.24
+59,VLBS,Vijaya Laghubitta Bittiya Sanstha Limited,11/10/15,11/10/16,1 year,343,1210,252.77
+60,API,Api Power Company Limited,11/18/15,11/18/16,1 year,307,540,87.77
+61,GBLBS,Grameen Bikas Laghubitta Bittiya Sanstha Limited,11/25/15,11/25/16,1 year,120,579,395
+62,HLBSL,Himalayan Laghubitta Bittiya Sanstha Limited,11/26/15,11/26/16,1 year,318,690,121.7
+63,JSLBB,Janautthan Samudayic Laghubitta Bittiya Sanstha Limited,12/10/15,12/10/16,1 year,419,1787,412.08
+64,GILB,Global IME Laghubitta Bittiya Sanstha Limited,12/22/15,12/22/16,1 year,321,1226,288.16
+65,HIDCL,Hydroelectricity Investment and Development Company Limited,7/12/16,7/12/17,1 year,359,193,-44.85
+66,MERO,Mero Microfinance Laghubitta Bittiya Sanstha Limited,9/5/16,9/5/17,1 year,392,2337,547.96
+67,NGPL,Ngadi Group Power Limited,9/7/16,9/7/17,1 year,277,230,-6.67
+68,KKHC,Khani Khola Hydropower Company Limited,1/12/17,1/12/18,1 year,353,148,-56.94
+69,NMFBS,National Laghubitta Bittiya Sanstha Limited,2/8/17,2/8/18,1 year,506,2200,424.7
+70,RSDC,RSDC Laghubitta Bittiya Sanstha Limited,2/8/17,2/8/18,1 year,346,983,1008.49
+71,DHPL,Dibyashwari Hydropower Company Limited,2/13/17,2/13/18,1 year,348,138,-60.34
+72,AKPL,Arun Kabeli Power Limited,4/16/17,4/16/18,1 year,326,265,-18.71
+73,SPDL,Synergy Power Development Limited,5/17/17,5/17/18,1 year,265,135,-49.06
+74,FOWAD,Forward Microfinance Laghubitta Bittiya Sanstha Limited,5/21/17,5/21/18,1 year,1051,2499,258.09
+75,UMHL,United Modi Hydropower Limited,5/30/17,5/30/18,1 year,329,190,-40.73
+76,SMATA,Samata Gharelu Laghubitta Bittiya Sanstha Limited,7/26/17,7/26/18,1 year,411,1329,290.85
+77,CHL,Chhyangdi Hydropower Company Limited,8/3/17,8/3/18,1 year,323,126,-60.68
+78,HPPL,Himalayan Power Partner Limited,8/21/17,8/21/18,1 year,363,251,-30.85
+79,MSLB,Mahuli Laghubitta Bittiya Sanstha Limited,8/31/17,8/31/18,1 year,1658,2365,113.21
+80,NHDL,Nepal Hydro Developer Limited,11/15/17,11/15/18,1 year,322,121,-62.42
+81,RADHI,Radhi Bidyut Company Limited,3/27/18,3/27/19,1 year,170,172,11.65
+82,SMB,Support Laghubitta Bittiya Sanstha Limited,4/5/18,4/5/19,1 year,313,609,96.49
+83,NADEP,NADEP Laghubitta Bittiya Sanstha Limited,8/30/18,8/30/19,1 year,650,461,69.62
+84,KPCL,Kalika Power Company Limited,10/11/18,10/11/19,1 year,121,80,-34.71
+85,PMHPL,Panchakanya Mai Hydropower Limited,10/11/18,10/11/19,1 year,136,88,-34.56
+86,AKJCL,Ankhukhola Hydropower Company Limited,12/20/18,12/20/19,1 year,102,57,-44.12
+87,JOSHI,Joshi Hydropower Development Company Limited,1/7/19,1/7/20,1 year,279,67,-75.99
+88,UPPER,Upper Tamakoshi Hydropower Limited,1/13/19,1/13/20,1 year,224,249,11.16
+89,SLBSL,Samudayik Laghubitta Bittiya Sanstha Limited,1/21/19,1/21/20,1 year,505,789,106.57
+90,GHL,Ghalemdi Hydro Limited,2/17/19,2/17/20,1 year,190,69,-66.84
+91,ALBSL,Asha Laghubitta Bittiya Sanstha Limited,3/11/19,3/11/20,1 year,306,710,160.08
+92,SHIVM,Shivam Cements Limited,3/24/19,3/24/20,1 year,418,473,24.06
+93,UPCL,Universal Power Company Limited,3/24/19,3/24/20,1 year,270,67,-72.96
+94,MHNL,Mountain Hydro Nepal Limited,4/17/19,4/17/20,1 year,101,87,-12.87
+95,PPCL,Panchthar Power Company Limited,5/5/19,5/5/20,1 year,255,100,-58.04
+96,HURJA,Himalaya Urja Bikas Company Limited,5/22/19,5/22/20,1 year,144,93,-34.72
+97,GLBSL,Gurans Laghubitta Bittiya Sanstha Limited,6/2/19,6/2/20,1 year,279,619,133.88
+98,GMFBS,Ganapati Laghubitta Bittiya Sanstha Limited,6/6/19,6/6/20,1 year,237,737,240.11
+99,UNHPL,Union Hydropower Limited,6/12/19,6/12/20,1 year,150,50,-66
+100,SMFBS,Swabhimaan Laghubitta Bittiya Sanstha Limited,6/17/19,6/17/20,1 year,281,840,285.69
+101,ILBS,Infinity Laghubitta Bittiya Sanstha Limited,7/8/19,7/8/20,1 year,343.2,744,139.92
+102,RHPL,Rasuwagadhi Hydropower Company Limited,8/6/19,8/6/20,1 year,263,144,-45.25
+103,SJCL,Sanjen Jalavidhyut Company Limited,8/6/19,8/6/20,1 year,261,135,-48.28
+104,NICBF,NIC ASIA Balanced Fund,11/11/19,11/11/20,1 year,10.3,10.17,76.41
+105,NBF2,2,2/9/20,2/9/21,1 year,10,10.33,93.3
+106,NRIC,Nepal Reinsurance Company Limited,6/29/20,6/29/21,1 year,382,1650,331.94
+107,NICLBSL,NIC Asia Laghubitta Bittiya Sanstha Limited,7/9/20,7/9/21,1 year,364,1550,315.11
+108,NMB50,NMB 50,7/15/20,7/15/21,1 year,10,14.95,99.5
+109,ACLBSL,Aarambha Chautari Laghubitta Bittiya Sanstha Limited,7/29/20,7/29/21,1 year,492,1670,269.47
+110,NRN,NRN Infrastructure and Development Limited,8/26/20,8/26/21,1 year,336,930,184.72
+111,USLB,Unnati Sahakarya Laghubitta Bittiya Sanstha Limited,8/30/20,8/30/21,1 year,684,2149.2,266.87
+112,LUK,Laxmi Unnati Kosh,9/14/20,9/14/21,1 year,9.28,10.45,282
+113,LEC,Liberty Energy Company Limited,9/20/20,9/20/21,1 year,270,383,41.85
+114,SSHL,Shiva Shree Hydropower Limited,10/29/20,10/29/21,1 year,132,425,202.27
+115,MEN,Mountain Energy Nepal Limited,12/16/20,12/16/21,1 year,378,1081.8,186.19
+116,UMRH,Mardi and R.B. Hydropower Limited,12/20/20,12/20/21,1 year,325,480,47.69
+117,SIGS2,2,1/11/21,1/11/22,1 year,10.45,11.34,295.6
+118,CGH,Chandragiri Hills Limited,2/7/21,2/7/22,1 year,164,1419,765.24
+119,NIFRA,Nepal Infrastructure Bank Limited,2/14/21,2/14/22,1 year,374,364,5.22
+120,GLH,Greenlife Hydropower Limited,3/16/21,3/16/22,1 year,328,462.5,41.01
+121,MLBSL,Mahila Laghubitta Bittiya Sanstha Limited,3/16/21,3/16/22,1 year,446,3648,1107.02
+122,SHEL,Singati Hydro Energy Limited,4/28/21,4/28/22,1 year,330,340,3.03
+123,RURU,Ru Ru Jalbidhyut Pariyojana Limited,5/3/21,5/3/22,1 year,384,895.4,162.6
+124,CHDC,CEDB Holdings Limited,6/9/21,6/9/22,1 year,457,720,57.55
+125,SBCF,Sunrise Bluechip Fund,6/9/21,6/9/22,1 year,10.12,8.1,-19.96
+126,NIBSF2,2,6/27/21,6/27/22,1 year,10.17,8.01,-21.24
+127,JBLB,Jeevan Bikas Laghubitta Bittiya Sanstha Limited,7/29/21,7/29/22,1 year,989.1,2855,391.07
+128,MKJC,Mailung Khola Jal Vidhyut Company Limited,9/22/21,9/22/22,1 year,186.5,441.2,136.57
+129,MLBS,Manushi Laghubitta Bittiya Sanstha Limited,10/6/21,10/6/22,1 year,397.5,1089,171.7
+130,HDHPC,Himal Dolakha Hydropower Company Limited,10/19/21,10/19/22,1 year,273,164,-39.93
+131,SAHAS,Sahas Urja Limited,10/31/21,10/31/22,1 year,445.8,426,-4.44
+132,TPC,Terhathum Power Company Limited,10/31/21,10/31/22,1 year,259.2,321,23.84
+133,NBF3,Nabil Balanced Fund III,11/22/21,11/22/22,1 year,9.88,7.8,-21.05
+134,SPC,Samling Power Company Limited,11/25/21,11/25/22,1 year,320.5,410,27.8
+135,NYADI,Nyadi Hydropower  Limited,11/29/21,11/29/22,1 year,310.5,283,-8.86
+136,MBJC,Madhya Bhotekoshi Jalavidyut Company Limited,12/26/21,12/26/22,1 year,110,223,102.73
+137,BNHC,Buddha Bhumi Nepal Hydropower Company Limited,1/18/22,1/18/23,1 year,261.7,428.9,63.89
+138,WNLB,Wean Nepal Laghubitta Bittiya Sanstha Limited,1/19/22,1/19/23,1 year,831,1086,42.94
+139,ENL,Emerging Nepal Limited,3/6/22,3/6/23,1 year,287.1,675,122.22
+140,NESDO,Nesdo Sambridha Laghubitta Bittiya Sanstha Limited,3/28/22,3/28/23,1 year,793.3,2249.9,183.61
+141,GVL,Green Ventures Limited,4/19/22,4/19/23,1 year,298.2,411.8,38.1
+142,BHL,Balephi Hydropower Limited,5/25/22,5/25/23,1 year,110.9,293.9,169.52
+143,ULBSL,Upakar Laghubitta Bittiya Sanstha Limited,5/27/22,5/27/23,1 year,1259.9,1351,75.5
+144,CYCL,CYC Nepal Laghubitta Bittiya Sanstha Limited,6/13/22,6/13/23,1 year,382.2,1289,357.9
+145,RFPL,River Falls Power Limited,6/16/22,6/16/23,1 year,290.2,285,-2.79
+146,DORDI,Dordi Khola Hydropower Company Limited,7/14/22,7/14/23,1 year,315,245,-21.62
+147,KDBY,Kumari Dhanabriddhi Yojana,7/27/22,7/27/23,1 year,9,9.3,3.33
+148,BHDC,Bindhyabasini Hydropower Development Company Limited,7/28/22,7/28/23,1 year,367.4,358.6,4.04
+149,HHL,Himalayan Hydropower Limited,8/8/22,8/8/23,1 year,250.8,219.8,-12.36
+150,HEI,Himalayan Everest Insurance Limited,8/10/22,8/10/23,1 year,459.5,598,33.75
+151,UHEWA,Upper Hewakhola Hydropower Company Limited,8/11/22,8/11/23,1 year,143.2,307.8,116.2
+152,RIDI,Ridi Power Company Limited,8/15/22,8/15/23,1 year,637.8,211.2,-53.31
+153,MHL,Mandakini Hydropower Limited,8/17/22,8/17/23,1 year,261,279.9,9.16
+154,SGHC,Ganga Hydropower & Construction Limited,8/17/22,8/17/23,1 year,295.9,223.6,-24.43
+155,USHEC,Upper Solu Hydro Electric Company Limited,8/17/22,8/17/23,1 year,357,235.8,-33.95
+156,RHGCL,Rapti Hydro & General Construction Limited,8/31/22,8/31/23,1 year,322.1,204,-36.04
+157,NICFC,NIC Asia Flexi Cap Fund,9/12/22,9/12/23,1 year,10,8.01,-19.9
+158,AVYAN,Aviyan Laghubitta Bittiya Sanstha Limited,9/25/22,9/25/23,1 year,347.6,673,93.61
+159,GIBF1,I,9/28/22,9/28/23,1 year,9,8.51,-5.56
+160,PPL,People's Power Limited,10/16/22,10/16/23,1 year,255.7,214,-16.31
+161,SPHL,Sayapatri Hydropower Limited,10/17/22,10/17/23,1 year,214.2,516.1,140.94
+162,DLBS,Dhaulagiri Laghubitta Bittiya Sanstha Limited,10/23/22,10/23/23,1 year,179.7,618,250.58
+163,SIKLES,Sikles Hydropower Limited,11/15/22,11/15/23,1 year,321,345.3,8.26
+164,EHPL,Eastern Hydropower Limited,12/14/22,12/14/23,1 year,237.6,348,46.46
+165,PHCL,Peoples Hydropower Company Limited,12/14/22,12/14/23,1 year,270,269.3,-0.26
+166,SHLB,Shrijanshil Laghubitta Bittiya Sanstha Limited,12/20/22,12/20/23,1 year,996.6,1031,3.45
+167,BHPL,Barahi Hydropower Public Limited,1/4/23,1/4/24,1 year,213.7,443,107.3
+168,SGIC,Sanima GIC Insurance Limited,1/23/23,1/23/24,1 year,404.2,549.9,36.05
+169,SJLIC,SuryaJyoti Life Insurance Company Limited,1/25/23,1/25/24,1 year,408.7,512,25.28
+170,NIMB,Nepal Investment Mega Bank Limited,2/23/23,2/23/24,1 year,216,163.9,-23.15
+171,UNLB,Unique Nepal Laghubitta Bittiya Sanstha Limited,2/28/23,2/28/24,1 year,989.4,1222.3,23.54
+172,SMHL,Super Madi Hydropower Limited,3/5/23,3/5/24,1 year,328.9,445.2,35.97
+173,SPL,Shuvam Power Limited,3/7/23,3/7/24,1 year,291.5,664,127.79
+174,MKHC,Maya Khola Hydropower Company Limited,3/22/23,3/22/24,1 year,292,290,-2.05
+175,KDL,Kalinchowk Darshan Limited,3/23/23,3/23/24,1 year,139.7,775,465.5
+176,AHL,Asian Hydropower Limited,3/23/23,3/23/24,1 year,328.6,427,32.99
+177,SMH,Supermai Hydropower  Limited,3/27/23,3/27/24,1 year,430.1,678,57.64
+178,SPIL,Siddhartha Premier Insurance Limited,4/4/23,4/4/24,1 year,573.9,737.9,30.49
+179,TAMOR,Sanima Middle Tamor Hydropower Limited,4/10/23,4/10/24,1 year,324.5,384.3,18.43
+180,MHCL,Molung Hydropower Company Limited,4/13/23,4/13/24,1 year,155.1,417,173.37
+181,SMJC,Sagarmatha Jalbidhyut Company Limited,4/13/23,4/13/24,1 year,340,387.9,12.94
+182,ANLB,Aatmanirbhar Laghubitta Bittiya Sanstha Limited,5/2/23,5/2/24,1 year,436.9,1997,403.94
+183,MAKAR,Makar Jitumaya Suri Hydropower Company Limited,5/7/23,5/7/24,1 year,255,351.9,38
+184,SALICO,Sagarmatha Lumbini Insurance Company Limited,5/15/23,5/15/24,1 year,560.5,692.2,24.39
+185,MKHL,Mai Khola Hydropower Limited,5/16/23,5/16/24,1 year,301.5,408,35.32
+186,SRLI,Sanima Reliance Life Insurance Limited,5/21/23,5/21/24,1 year,404.8,456,12.65
+187,IGI,IGI Prudential Insurance Limited,6/4/23,6/4/24,1 year,407.9,530,29.93
+188,BEDC,Bhugol Energy Development Company Limited,6/8/23,6/8/24,1 year,223,421,78.03
+189,DOLTI,Dolti Power Company Ltd,6/8/23,6/8/24,1 year,287.1,433,49.77
+190,CITY,City Hotel Limited,6/11/23,6/11/24,1 year,122.2,698,471.19
+191,MCHL,Menchhiyam Hydropower  Limited,6/18/23,6/18/24,1 year,255.2,415.3,62.74
+192,IHL,Ingwa Hydropower Ltd,6/20/23,6/20/24,1 year,320.9,423,31.82
+193,HLI,Himalayan Life Insurance Limited,6/22/23,6/22/24,1 year,381.1,378,-0.81
+194,MEL,Modi Energy Limited,7/5/23,7/5/24,1 year,243,223.4,-9.38
+195,RAWA,Rawa Energy Development Ltd.,7/5/23,7/5/24,1 year,274.2,560,106.78
+196,UAIL,United Ajod Insurance Limited,7/17/23,7/17/24,1 year,538.4,640,31.17
+197,ILI,IME Life Insurance Company Limited,8/6/23,8/6/24,1 year,582.4,521.6,12.18
+198,NRM,Nepal Republic Media Limited,8/6/23,8/6/24,1 year,275.4,487,76.83
+199,TSHL,Three Star Hydropower Limited,8/13/23,8/13/24,1 year,280.5,815,190.55
+200,USHL,Upper Syange Hydropower Limited,8/13/23,8/13/24,1 year,278.9,661,137
+201,GCIL,Ghorahi Cement Industry Limited,8/13/23,8/13/24,1 year,509,615,38.95
+202,KBSH,Kutheli Bukhari Small Hydropower Limited,8/21/23,8/21/24,1 year,526.9,2091,296.85
+203,LSL,Laxmi Sunrise Bank Limited,8/28/23,8/28/24,1 year,181.2,259,53.15
+204,RNLI,Reliable Nepal Life Insurance Limited,9/17/23,9/17/24,1 year,495,481,14.29
+205,SNLI,Sun Nepal Life Insurance Company Limited,9/21/23,9/21/24,1 year,470,565,48.04
+206,MEHL,Manakamana Engineering Hydropower Limited,9/25/23,9/25/24,1 year,225,375,66.67
+207,ULHC,Upper Lohore Khola Hydropower Company Limited,9/25/23,9/25/24,1 year,264,390,47.73
+208,CLI,Citizen Life Insurance Company Limited,10/1/23,10/1/24,1 year,457.2,633,45.43
+209,MANDU,Mandu Hydropower Limited,10/11/23,10/11/24,1 year,410.5,972,137.52
+210,HATHY,Hathway Investment Nepal Limited,10/11/23,10/11/24,1 year,313.7,1444,398.1
+211,BGWT,Bhagawati Hydropower Development Company Limited,10/12/23,10/12/24,1 year,397.2,960,156.71
+212,MSHL,Mid Solu Hydropower Company Limited,10/12/23,10/12/24,1 year,330,1026.9,245.76
+213,SONA,Sonapur Minerals and Oil Limited,10/29/23,10/29/24,1 year,315,487,54.6
+214,MMKJL,Mathillo Mailun Khola Jalvidhyut Limited,11/20/23,11/20/24,1 year,259.6,681.9,162.67
+215,TVCL,Trishuli Jal Vidhyut Company Limited,12/7/23,12/7/24,1 year,294.8,511,73.68
+216,MKCL,Muktinath Krishi Company Limited,12/14/23,12/14/24,1 year,196.6,1500,688.4
+217,PMLI,Prabhu Mahalaxmi Life Insurance Company Limited,12/19/23,12/19/24,1 year,589,519.5,-2.89
+218,VLUCL,Vision Lumbini Urja Company Limited,12/21/23,12/21/24,1 year,401.8,648,61.32
+219,CKHL,Chirkhwa Hydro Power Limited,12/21/23,12/21/24,1 year,330,771,119.7
+220,NWCL,Nepal Warehousing Company Limited,12/21/23,12/21/24,1 year,229.6,954,320.3
+221,SIGS3,Siddhartha Investment Growth Scheme 3,1/4/24,1/4/25,1 year,8.42,9.75,98.46
+222,HRL,Himalayan Reinsurance Limited,1/8/24,1/8/25,1 year,340.1,825,152.34
+223,SARBTM,Sarbottam Cement Limited,3/19/24,3/19/25,1 year,611.6,807,44.13
+224,NMLBBL,Nerude Mirmire Laghubitta Bittiya Sanstha Limited,5/19/24,5/19/25,1 year,646.6,620.72,-4
+225,MATRI,Matribhumi Laghubitta Bittiya Sanstha Limited,8/13/24,8/13/25,1 year,1406.2,1169.21,-16.85
+226,SMPDA,Sampada Laghubitta Bittiya Sanstha Limited,8/18/24,8/18/25,1 year,1162.7,942.21,-18.96
+227,GMLI,Guardian Micro Life Insurance Limited,2/9/25,2/9/26,1 year,331.1,1772,435.19
+228,NMIC,Nepal Micro Insurance Company Limited,4/8/25,4/8/26,1 year,332.5,1195,259.4
+229,CREST,Crest Micro Life Insurance Limited,4/10/25,4/10/26,1 year,332.7,1312.8,294.59
+230,OMPL,Om Megashree Pharmaceuticals Limited,5/4/25,5/4/26,1 year,297,1125,278.79
+,,,,,,,Avg Return %,97.03308696
+,,,,,,,CAGR,97.03308696
+,,,,,,,Median,36.01

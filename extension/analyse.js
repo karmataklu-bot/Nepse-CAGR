@@ -1,12 +1,16 @@
     // ── Page switching ──
     const backDestination = { buffett: 'bullbear' };
+    let lastSearchedSymbol = null;
     function switchPage(name) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
       document.getElementById('analyse-menu').classList.remove('open');
       document.getElementById('analyse-trigger').classList.remove('open');
       document.getElementById('back-btn').style.display = name === 'analyse' ? 'none' : 'inline-block';
-      if (name === 'bullbear') buildChart();
+      if (name === 'bullbear') {
+        buildChart();
+        if (lastSearchedSymbol) doBullSearch(lastSearchedSymbol);
+      }
     }
 
     // ── Back button ──
@@ -67,9 +71,93 @@
     // ── Search ──
     document.getElementById('search-input').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 
+    const BULL_CYCLES_DEF = [
+      { num: 1, label: 'Bull 1', period: '~1994–2000', blank: true, reason: 'Pre-digital era' },
+      { num: 2, label: 'Bull 2', period: '2002–2008',  blank: true, reason: 'Historical data unavailable' },
+      { num: 3, label: 'Bull 3', period: '2012–2016', start: '2012-03-29', end: '2016-07-27' },
+      { num: 4, label: 'Bull 4', period: '2019–2021', start: '2019-03-05', end: '2021-08-18' },
+      { num: 5, label: 'Bull 5 ★ Current', period: '2022–now', start: '2022-09-25', end: null, current: true },
+    ];
+
+    async function doBullSearch(symbol) {
+      if (!symbol) return;
+      const container = document.getElementById('bull-cycle-results');
+      container.style.display = 'block';
+      container.innerHTML = '<div style="color:var(--label);font-size:13px;padding:16px 0">⏳ Loading ' + symbol + ' across bull cycles...</div>';
+
+      const port = await findPort();
+      const fetchable = BULL_CYCLES_DEF.filter(c => !c.blank);
+
+      const fetched = await Promise.all(fetchable.map(async cycle => {
+        const payload = { symbol, investment: 100000, start_date: cycle.start };
+        if (cycle.end) payload.end_date = cycle.end;
+        try {
+          if (port) {
+            const resp = await fetch(`http://localhost:${port}/cagr`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            return { num: cycle.num, data: await resp.json() };
+          } else {
+            const data = await new Promise(resolve => chrome.runtime.sendMessage({ action: 'cagrViaNative', payload }, resolve));
+            return { num: cycle.num, data };
+          }
+        } catch(e) {
+          return { num: cycle.num, data: { error: e.message } };
+        }
+      }));
+
+      const dataMap = {};
+      fetched.forEach(r => { dataMap[r.num] = r.data; });
+      renderBullBoxes(symbol, dataMap);
+    }
+
+    function renderBullBoxes(symbol, dataMap) {
+      const container = document.getElementById('bull-cycle-results');
+      const boxes = BULL_CYCLES_DEF.map(cycle => {
+        if (cycle.blank) {
+          return `<div class="bull-box bull-box-blank">
+            <div class="bull-box-title">${cycle.label}</div>
+            <div class="bull-box-period">${cycle.period}</div>
+            <div class="bull-box-na">—</div>
+            <div class="bull-box-note">${cycle.reason}</div>
+          </div>`;
+        }
+        const d = dataMap[cycle.num];
+        if (!d || d.error) {
+          return `<div class="bull-box bull-box-blank">
+            <div class="bull-box-title">${cycle.label}</div>
+            <div class="bull-box-period">${cycle.period}</div>
+            <div class="bull-box-na">❌</div>
+            <div class="bull-box-note">${d?.error || 'No data'}</div>
+          </div>`;
+        }
+        const ratio = d.todays_value / d.initial_investment;
+        const multX = ratio >= 2 ? Math.round(ratio) + 'x' : ratio.toFixed(1) + 'x';
+        const soFar = cycle.current ? ' so far' : '';
+        const verb  = d.cagr_pct >= 0 ? 'grew' : 'fell';
+        const cagrColor = d.cagr_pct >= 0 ? 'var(--accent)' : '#ff6b6b';
+        return `<div class="bull-box">
+          <div class="bull-box-title">${cycle.label}</div>
+          <div class="bull-box-period">${d.start_date} → ${d.end_date}</div>
+          <div class="bull-box-symbol">${symbol}</div>
+          <div class="bull-box-cagr" style="color:${cagrColor}">${d.cagr_pct >= 0 ? '+' : ''}${d.cagr_pct.toFixed(1)}% CAGR</div>
+          <div class="bull-box-duration">⏱ ${d.years.toFixed(1)} yrs</div>
+          <div class="bull-box-multi">📈 Investment ${verb} ~${multX}${soFar}</div>
+          <div class="bull-box-prices">Rs.${fmt(d.start_price)} → Rs.${fmt(d.ltp)}</div>
+        </div>`;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="bull-cycle-header">📊 ${symbol} — Performance Across Bull Cycles</div>
+        <div class="bull-boxes-grid">${boxes}</div>`;
+    }
+
     async function doSearch() {
       const symbol = document.getElementById('search-input').value.trim().toUpperCase();
       if (!symbol) return;
+      lastSearchedSymbol = symbol;
       const payload = { symbol, investment: 100000, years: 5 };
       document.getElementById('page-status').textContent = '⏳ Calculating...';
       document.getElementById('results-area').style.display = 'none';

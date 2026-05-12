@@ -414,6 +414,24 @@
     .bb-card td { padding: 8px 12px; }
     .val-bull { color: var(--bull); font-weight: 700; }
     .val-bear { color: var(--bear); font-weight: 700; }
+
+    /* Bull cycle stock boxes */
+    #bull-cycle-results { display: none; margin-top: 28px; }
+    .bull-cycle-header { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .bull-boxes-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    @media (max-width: 860px) { .bull-boxes-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px) { .bull-boxes-grid { grid-template-columns: repeat(2, 1fr); } }
+    .bull-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .bull-box-blank { opacity: 0.45; }
+    .bull-box-title { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.4px; }
+    .bull-box-period { font-size: 11px; color: var(--label); }
+    .bull-box-symbol { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 4px; }
+    .bull-box-cagr { font-size: 20px; font-weight: 800; }
+    .bull-box-duration { font-size: 12px; color: var(--label); }
+    .bull-box-multi { font-size: 12px; color: var(--text); font-weight: 600; }
+    .bull-box-prices { font-size: 11px; color: var(--label); margin-top: 2px; }
+    .bull-box-na { font-size: 22px; color: var(--label); margin: 8px 0; }
+    .bull-box-note { font-size: 11px; color: var(--label); }
   </style>
 </head>
 <body>
@@ -499,7 +517,6 @@
           <div class="bb-title">NEPSE Bull &amp; Bear Cycles</div>
           <div class="bb-sub">Historical market cycles from 2000 to today · Data: ShareSansar</div>
         </div>
-        <input type="text" id="bb-stock-input" placeholder="Company name or ticker" style="background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 16px;font-size:13px;outline:none;width:240px;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
       </div>
 
       <div class="bb-legend">
@@ -568,6 +585,8 @@
           </div>
         </div>
       </div>
+
+      <div id="bull-cycle-results"></div>
     </div>
   </div>
 

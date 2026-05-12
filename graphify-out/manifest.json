@@ -1,0 +1,126 @@
+{
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/run_index_history.py": {
+    "mtime": 1778094172.2679555,
+    "hash": "027b0885e3ef702103a2558ae873a96e"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/nepse_cagr.py": {
+    "mtime": 1777893511.4596002,
+    "hash": "04ed125bc5fd76970fa1a65a2ce5e177"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/nepse_cagr_server.py": {
+    "mtime": 1777880637.0,
+    "hash": "53b998c90f40542c502fbfe75bdd4380"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/index_history.py": {
+    "mtime": 1778131331.608525,
+    "hash": "9bf46a31fa8646647afbb0d2743ffba3"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/nepse_host.py": {
+    "mtime": 1777888128.7669067,
+    "hash": "f03f7ff29b12a8ece20dbd978454b2e8"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/run_daily.py": {
+    "mtime": 1777869511.8658264,
+    "hash": "afa50a2cf4d4a2c159bd161e6636be71"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/run_github_actions.py": {
+    "mtime": 1777869511.8659241,
+    "hash": "92d3a9e2774d5f33d4358d17d6186435"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/core/daily_prices.py": {
+    "mtime": 1777869511.8649397,
+    "hash": "5b9a60b2143f331a01129d2c764e0de8"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/core/__init__.py": {
+    "mtime": 1777869511.864606,
+    "hash": "1ef76603dd20fce5afe975144984353c"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/core/floorsheet.py": {
+    "mtime": 1777869511.8651035,
+    "hash": "e8d451baac2ea81cbbf8e18755f11248"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/core/daily.py": {
+    "mtime": 1777869511.8648357,
+    "hash": "75851d0c16ddd1110c0063ecf7568815"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/core/history.py": {
+    "mtime": 1777869511.865281,
+    "hash": "72edd8c73ad43a50ab7033a6f3f39ffb"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/popup.js": {
+    "mtime": 1777880514.0,
+    "hash": "281bf2f25b5b8b7af424df12b2482b89"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/background.js": {
+    "mtime": 1777880585.0,
+    "hash": "e3730832283defd9e5ea86bfe4e33e54"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/chart.umd.js": {
+    "mtime": 1778155549.663461,
+    "hash": "283d65ad75eca387c3fc8d0f8d37ae3b"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/analyse.js": {
+    "mtime": 1778244438.0566733,
+    "hash": "a7927260cb7a7fb2decc0ef2d4ddba2e"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/requirements.txt": {
+    "mtime": 1777869511.863978,
+    "hash": "9b5653579ae9b88dd4fac58fee4b522c"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/SETUP.md": {
+    "mtime": 1777864152.0,
+    "hash": "2ce57e58608232163932a96aba5e3cda"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/README.md": {
+    "mtime": 1777909503.7108939,
+    "hash": "c560a89b350bbbcc27d0a50464d00310"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/CLAUDE.md": {
+    "mtime": 1777888811.9316332,
+    "hash": "8ee39dcfe68a23b3797b02648930d699"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/requirements.txt": {
+    "mtime": 1777869511.8657522,
+    "hash": "50ca90123c0037682f48d3b9cb01c874"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/scraper/README.md": {
+    "mtime": 1777869511.8642468,
+    "hash": "b1c33543465e0f2f9b249e5a2d3a35c0"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/analyse.html": {
+    "mtime": 1778244438.056355,
+    "hash": "f33a7d75121f192a103be55e97e3873f"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/popup.html": {
+    "mtime": 1777880488.0,
+    "hash": "b952a76081853b1783f93494c0faab7b"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/buffett-indicator.pdf": {
+    "mtime": 1778244438.0580604,
+    "hash": "88f6d32583b6b2dbd0dd712bd707b691"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/data/Links/Buffet Indicator.pdf": {
+    "mtime": 1778244438.019101,
+    "hash": "88f6d32583b6b2dbd0dd712bd707b691"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/icons/icon16.png": {
+    "mtime": 1777865290.0,
+    "hash": "f4acd77689697e6bd8f50d6c9691415f"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/icons/icon48.png": {
+    "mtime": 1777865290.0,
+    "hash": "190743cd4270aac0a174e9f23e23fe59"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/icons/icon128.png": {
+    "mtime": 1777865290.0,
+    "hash": "7d6f0d697e7c9aec8aa33f598f4f5bd2"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/extension/icons/icon32.png": {
+    "mtime": 1777865290.0,
+    "hash": "899de6b04544ec1b0b5926e899f4564d"
+  },
+  "/Users/karmagurung/CodingProjects/Nepse-CAGR/data/index/nepse/Nepse Graph.png": {
+    "mtime": 1778244438.0557704,
+    "hash": "ca74406f24f9591043e40a8c9026bad0"
+  }
+}

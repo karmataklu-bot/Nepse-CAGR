@@ -1,4 +1,3 @@
-
 import logging
 import argparse
 import time
@@ -6,6 +5,7 @@ import json
 from pathlib import Path
 
 from .history import ShareSansarHistoryScraper
+from .ipo_listing import ShareSansarIPO_listingScraper
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,10 +22,12 @@ class DailyScraperManager:
     """
     Manages daily scraping tasks for priority companies (company_list.json):
       - Price history updates via ShareSansar (history.py)
+      - IPO listing dates via ShareSansar (ipo_listing.py)
     """
 
     def __init__(self, base_dir="data"):
         self.price_scraper = ShareSansarHistoryScraper()
+        self.ipo_scraper = ShareSansarIPO_listingScraper()
 
         self.data_dir = Path(__file__).resolve().parent.parent.parent / "data"
         self.company_wise_dir = self.data_dir / "company-wise"
@@ -105,6 +107,7 @@ class DailyScraperManager:
         Run the daily update:
           - Refresh company ID mapping (catches new IPOs)
           - Update prices for priority companies
+          - Update IPO listing dates
 
         :param check_new_only: Only scrape NEW companies (prices), skip existing.
         :param force_full:     Force full re-scrape of prices.
@@ -123,6 +126,13 @@ class DailyScraperManager:
             existing = self.get_existing_companies()
             new_only = target - existing
             self._update_prices(new_only, force_full=False)
+
+        # Incrementally update IPO listing dates (fast: stops on first known symbol)
+        logger.info("--- Updating IPO listing dates ---")
+        try:
+            self.ipo_scraper.scrape_all_listings(stop_on_existing=True)
+        except Exception as e:
+            logger.error(f"IPO listing scrape failed: {e}")
 
         logger.info("=== Daily Update Completed ===")
 

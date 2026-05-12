@@ -71,10 +71,11 @@ def nearest_price(prices: pd.DataFrame, target_date: date, direction: str = "for
 
 
 # ── CAGR calculation ──────────────────────────────────────────────────────────
-def calculate_cagr(symbol: str, start_date: date, initial_investment: float) -> dict:
+def calculate_cagr(symbol: str, start_date: date, initial_investment: float, end_date: date = None) -> dict:
     today = date.today()
-    if start_date >= today:
-        return {"error": "Start date must be before today."}
+    effective_end = end_date if end_date and end_date < today else today
+    if start_date >= effective_end:
+        return {"error": "Start date must be before end date."}
 
     try:
         prices = load_prices(symbol)
@@ -98,7 +99,7 @@ def calculate_cagr(symbol: str, start_date: date, initial_investment: float) -> 
         if pd.isna(action_date):
             continue
         action_date = action_date.date()
-        if action_date <= actual_start_date or action_date > today:
+        if action_date <= actual_start_date or action_date > effective_end:
             continue
 
         bonus_pct = float(row.get("bonus_share", 0) or 0)
@@ -128,8 +129,8 @@ def calculate_cagr(symbol: str, start_date: date, initial_investment: float) -> 
                 "cash_rs": round(cash_rs, 2)
             })
 
-    # Current value
-    latest_row  = nearest_price(prices, today, direction="backward")
+    # Value at effective_end
+    latest_row  = nearest_price(prices, effective_end, direction="backward")
     latest_date = latest_row["date"].date()
     ltp         = float(latest_row["close"])
     market_value = units * ltp
@@ -210,7 +211,16 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json({"error": "Provide either years or start_date."})
                 return
 
-            result = calculate_cagr(symbol, start_date, investment)
+            end_date = None
+            end_date_str = body.get("end_date")
+            if end_date_str:
+                try:
+                    end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+                except ValueError:
+                    self._send_json({"error": "Invalid end_date format. Use YYYY-MM-DD."})
+                    return
+
+            result = calculate_cagr(symbol, start_date, investment, end_date)
             self._send_json(result)
         else:
             self.send_response(404)

@@ -41,6 +41,16 @@ DEFAULT_DATA_DIR = Path(__file__).parent / "data"  # override with --data-dir
 # Helpers
 # ─────────────────────────────────────────────
 
+def get_all_symbols(data_dir: Path) -> list:
+    company_dir = data_dir / "company-wise"
+    if not company_dir.exists():
+        sys.exit(f"❌  company-wise directory not found at: {company_dir}")
+    return sorted([
+        d.name for d in company_dir.iterdir()
+        if d.is_dir() and (d / "prices.csv").exists()
+    ])
+
+
 def load_prices(symbol: str, data_dir: Path) -> pd.DataFrame:
     path = data_dir / "company-wise" / symbol.upper() / "prices.csv"
     if not path.exists():
@@ -149,10 +159,11 @@ def calculate_cagr(
     initial_investment: float,
     data_dir: Path,
     verbose: bool = True,
+    end_date: date = None,
 ) -> dict:
-    today = date.today()
-    if start_date >= today:
-        sys.exit("❌  Start date must be before today.")
+    reference_end = end_date if end_date is not None else date.today()
+    if start_date >= reference_end:
+        raise ValueError(f"Start date {start_date} must be before end date {reference_end}.")
 
     prices    = load_prices(symbol, data_dir)
     dividends = load_dividends(symbol, data_dir)
@@ -195,7 +206,7 @@ def calculate_cagr(
         if pd.isna(action_date):
             continue
         action_date = action_date.date()
-        if action_date <= actual_start_date or action_date > today:
+        if action_date <= actual_start_date or action_date > reference_end:
             continue
         actions.append((action_date, "dividend", row))
 
@@ -204,7 +215,7 @@ def calculate_cagr(
         if pd.isna(action_date):
             continue
         action_date = action_date.date()
-        if action_date <= actual_start_date or action_date > today:
+        if action_date <= actual_start_date or action_date > reference_end:
             continue
         actions.append((action_date, "right", row))
 
@@ -253,8 +264,8 @@ def calculate_cagr(
                 if verbose:
                     print(f"  {str(action_date):<14} {event_label:<35} {units:>12.4f} {'':>12}")
 
-    # ── Step 4: Current value ─────────────────────────────────────────────
-    latest_row  = nearest_price(prices, today, direction="backward")
+    # ── Step 4: End-of-window value ───────────────────────────────────────
+    latest_row  = nearest_price(prices, reference_end, direction="backward")
     latest_date = latest_row["date"].date()
     ltp         = float(latest_row["close"])
 
