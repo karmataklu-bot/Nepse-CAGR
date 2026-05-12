@@ -18,6 +18,7 @@ Usage examples
     python nepse_cagr.py --symbol NABIL --start-date 2018-01-15
     python nepse_cagr.py --symbol NABIL --start-date 2018-01-15 --investment 200000
     python nepse_cagr.py --symbol NABIL --years 3 --data-dir /path/to/Nepse-All-Scraper
+    python nepse_cagr.py --symbol NABIL --years 3 --end-date 2023-01-01
 """
 
 import argparse
@@ -190,6 +191,7 @@ def calculate_cagr(
             print(f"  ⚠️  Adjusted to       : {actual_start_date}  (earliest available data)")
         else:
             print(f"  Actual start date    : {actual_start_date}  (nearest trading day)")
+        print(f"  End date             : {reference_end}{' (today)' if end_date is None else ''}")
         print(f"  Price on start date  : Rs. {start_price:,.2f}")
         print(f"  Initial investment   : Rs. {initial_investment:,.2f}")
         print(f"  Units purchased      : {units:.4f} kitta")
@@ -323,6 +325,7 @@ def main():
     )
     parser.add_argument("--symbol", required=False, default=None, help="Stock symbol, e.g. NABIL")
     parser.add_argument("--start-date", help="Start date in YYYY-MM-DD format. Overrides --years.")
+    parser.add_argument("--end-date", help="End date in YYYY-MM-DD format. Defaults to today.")
     parser.add_argument("--years", type=float, help="Number of years back from today (e.g. 5 or 2.5).")
     parser.add_argument("--investment", type=float, default=DEFAULT_INVESTMENT,
                         help=f"Initial investment in Rs. (default: {DEFAULT_INVESTMENT:,})")
@@ -350,6 +353,12 @@ def main():
         else:
             sys.exit("❌  Invalid choice.")
 
+    # ── End date prompt (interactive only) ──────────────────────────────
+    if not args.end_date:
+        end_date_input = input("\n  End date in YYYY-MM-DD (press Enter for today): ").strip()
+        if end_date_input:
+            args.end_date = end_date_input
+
     inv_input = input(f"\n  Initial investment in Rs. (press Enter for default {DEFAULT_INVESTMENT:,}): ").strip()
     if inv_input:
         args.investment = float(inv_input)
@@ -365,12 +374,22 @@ def main():
     else:
         sys.exit("❌  Provide either --start-date or --years.")
 
+    # Resolve end date
+    if args.end_date:
+        try:
+            end_date = datetime.strptime(args.end_date, "%Y-%m-%d").date()
+        except ValueError:
+            sys.exit("❌  --end-date must be in YYYY-MM-DD format.")
+    else:
+        end_date = None
+
     result = calculate_cagr(
         symbol=args.symbol,
         start_date=start_date,
         initial_investment=args.investment,
         data_dir=args.data_dir,
         verbose=not args.quiet,
+        end_date=end_date,
     )
 
     if args.quiet:
@@ -389,6 +408,7 @@ def get_cagr(
     investment: float = DEFAULT_INVESTMENT,
     data_dir: Path = DEFAULT_DATA_DIR,
     verbose: bool = True,
+    end_date: date = None,
 ) -> dict:
     """
     Importable function. Returns a dict with full breakdown + cagr_pct.
@@ -397,12 +417,15 @@ def get_cagr(
         from nepse_cagr import get_cagr
         result = get_cagr("NABIL", years=5)
         print(result["cagr_pct"])
+
+        # With a custom end date:
+        result = get_cagr("NABIL", years=5, end_date=date(2023, 1, 1))
     """
     if start_date is None and years is None:
         raise ValueError("Provide either start_date or years.")
     if start_date is None:
         start_date = date.today() - timedelta(days=int(years * 365.25))
-    return calculate_cagr(symbol, start_date, investment, data_dir, verbose)
+    return calculate_cagr(symbol, start_date, investment, data_dir, verbose, end_date=end_date)
 
 
 if __name__ == "__main__":
