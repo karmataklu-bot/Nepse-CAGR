@@ -39,6 +39,7 @@ Usage:
 
 import argparse
 import json
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -127,8 +128,19 @@ if NAMES_PATH.exists():
         _COMPANY_NAMES = {}
 
 
+def _clean_company_name(name: str) -> str:
+    """
+    Remove trailing ticker symbol in parentheses from company names.
+    e.g. "CYC Nepal Laghubitta Bittiya Sanstha Limited ( CYCL )" -> "CYC Nepal Laghubitta Bittiya Sanstha Limited"
+    Handles patterns like "( TICKER )" with varying whitespace at the end of the string.
+    """
+    cleaned = re.sub(r'\s*\(\s*[A-Z0-9]+\s*\)\s*$', '', name).strip()
+    return cleaned if cleaned else name
+
+
 def get_stock_name(symbol: str) -> str:
-    return _COMPANY_NAMES.get(symbol, symbol)
+    raw = _COMPANY_NAMES.get(symbol, symbol)
+    return _clean_company_name(raw)
 
 
 def get_cycle(key: str) -> dict:
