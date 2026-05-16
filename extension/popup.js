@@ -149,9 +149,14 @@ function handleResult(data) {
   if (data.events && data.events.length > 0) {
     data.events.forEach(ev => {
       const tr = document.createElement('tr');
-      const badge = ev.type === 'bonus'
-        ? `<span class="badge badge-bonus">Bonus ${(ev.pct * 100).toFixed(0)}%</span>`
-        : `<span class="badge badge-cash">Cash ${(ev.pct * 100).toFixed(1)}%</span>`;
+      let badge;
+      if (ev.type === 'bonus') {
+        badge = `<span class="badge badge-bonus">Bonus ${(ev.pct * 100).toFixed(0)}%</span>`;
+      } else if (ev.type === 'right') {
+        badge = `<span class="badge badge-right">Rights ${ev.ratio} @ Rs.${ev.issue_price}</span>`;
+      } else {
+        badge = `<span class="badge badge-cash">Cash ${(ev.pct * 100).toFixed(1)}%</span>`;
+      }
       const cashCol = ev.type === 'cash' ? 'Rs. ' + fmt(ev.cash_rs) : '—';
       tr.innerHTML = `
         <td>${ev.date}</td>

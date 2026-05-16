@@ -16,10 +16,10 @@ from pathlib import Path
 import pandas as pd
 
 # ── Import from your existing nepse_cagr.py ──────────────────────────────────
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from nepse_cagr import calculate_cagr, get_all_symbols
 
-DEFAULT_DATA_DIR  = Path(__file__).parent / "data"
+DEFAULT_DATA_DIR  = Path(__file__).parent.parent / "data"
 DEFAULT_AFTER     = date(2022, 9, 25)
 DEFAULT_OUTPUT    = "new_listings_cagr.csv"
 DEFAULT_INVESTMENT = 100_000

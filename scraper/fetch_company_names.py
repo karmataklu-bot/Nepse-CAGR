@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s")
 logger = logging.getLogger(__name__)
 
-DATA_DIR  = Path(__file__).parent / "data"
+DATA_DIR  = Path(__file__).parent.parent / "data"
 OUT_PATH  = DATA_DIR / "company_names.json"
 LIST_PATH = DATA_DIR / "company_list.json"
 

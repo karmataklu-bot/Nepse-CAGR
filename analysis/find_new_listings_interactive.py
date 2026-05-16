@@ -15,17 +15,17 @@ from pathlib import Path
 
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from nepse_cagr import calculate_cagr, get_all_symbols
 
-DEFAULT_DATA_DIR   = Path(__file__).parent / "data"
+DEFAULT_DATA_DIR   = Path(__file__).parent.parent / "data"
 DEFAULT_INVESTMENT = 100_000
 START_DATE         = date(2022, 9, 25)
-RESEARCH_DIR       = Path(__file__).parent / "Research"
+RESEARCH_DIR       = Path(__file__).parent.parent / "Research"
 MISS_DAYS          = 10   # days missed from listing
 
 # Load company names once
-_NAMES_PATH = Path(__file__).parent / "data" / "company_names.json"
+_NAMES_PATH = Path(__file__).parent.parent / "data" / "company_names.json"
 _COMPANY_NAMES: dict = {}
 if _NAMES_PATH.exists():
     with open(_NAMES_PATH) as _f:
@@ -35,7 +35,8 @@ if _NAMES_PATH.exists():
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def get_stock_name(symbol: str) -> str:
-    return _COMPANY_NAMES.get(symbol, symbol)
+    raw = _COMPANY_NAMES.get(symbol, symbol)
+    return re.sub(r'\s*\(\s*[A-Z0-9]+\s*\)\s*$', '', raw).strip() or raw
 
 
 def get_first_trading_date(symbol: str, data_dir: Path) -> date | None:
@@ -264,6 +265,14 @@ def prompt_yn(question: str) -> bool:
 
 
 def main():
+    while True:
+        _run_once()
+        again = input("  Run another query? [y/N]: ").strip().lower()
+        if again != "y":
+            break
+
+
+def _run_once():
     today    = date.today()
     data_dir = DEFAULT_DATA_DIR
 
@@ -351,12 +360,6 @@ def main():
 
             run_analysis(months, days, window_label, filename, data_dir, DEFAULT_INVESTMENT,
                          missed_days=missed_days, start_date=since)
-
-    again = input("  Run another query? [y/N]: ").strip().lower()
-    if again == "y":
-        print()
-        main()
-
 
 if __name__ == "__main__":
     main()

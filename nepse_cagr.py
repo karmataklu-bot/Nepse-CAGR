@@ -22,7 +22,6 @@ Usage examples
 """
 
 import argparse
-import os
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -36,6 +35,7 @@ import pandas as pd
 FACE_VALUE = 100          # Rs. face value for most NEPSE stocks
 DEFAULT_INVESTMENT = 100_000  # Rs.
 DEFAULT_DATA_DIR = Path(__file__).parent / "data"  # override with --data-dir
+DAYS_PER_YEAR = DAYS_PER_YEAR    # accounts for leap years
 
 
 # ─────────────────────────────────────────────
@@ -162,6 +162,19 @@ def calculate_cagr(
     verbose: bool = True,
     end_date: date = None,
 ) -> dict:
+    """
+    Calculate total return and CAGR for a NEPSE stock over a date window.
+
+    Corporate actions applied chronologically:
+      - Right shares: new units added, issue price added to total_invested
+      - Cash dividend: cumulative units × face_value × pct (not reinvested)
+      - Bonus shares: new units added, no cash impact
+
+    Returns dict with keys: symbol, start_date, end_date, years,
+      initial_investment, total_right_share_cost, total_invested,
+      start_price, units_bought, total_units_today, ltp,
+      market_value, total_cash_dividends, todays_value, cagr_pct
+    """
     reference_end = end_date if end_date is not None else date.today()
     if start_date >= reference_end:
         raise ValueError(f"Start date {start_date} must be before end date {reference_end}.")
@@ -275,7 +288,7 @@ def calculate_cagr(
     total_invested = initial_investment + total_right_share_cost
     todays_value   = market_value + total_cash_dividends
 
-    years = (latest_date - actual_start_date).days / 365.25
+    years = (latest_date - actual_start_date).days / DAYS_PER_YEAR
     cagr  = (todays_value / total_invested) ** (1 / years) - 1
 
     if verbose:
@@ -370,7 +383,7 @@ def main():
         except ValueError:
             sys.exit("❌  --start-date must be in YYYY-MM-DD format.")
     elif args.years:
-        start_date = date.today() - timedelta(days=int(args.years * 365.25))
+        start_date = date.today() - timedelta(days=int(args.years * DAYS_PER_YEAR))
     else:
         sys.exit("❌  Provide either --start-date or --years.")
 
@@ -424,7 +437,7 @@ def get_cagr(
     if start_date is None and years is None:
         raise ValueError("Provide either start_date or years.")
     if start_date is None:
-        start_date = date.today() - timedelta(days=int(years * 365.25))
+        start_date = date.today() - timedelta(days=int(years * DAYS_PER_YEAR))
     return calculate_cagr(symbol, start_date, investment, data_dir, verbose, end_date=end_date)
 
 

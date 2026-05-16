@@ -46,14 +46,14 @@ from pathlib import Path
 
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from nepse_cagr import calculate_cagr, get_all_symbols
 
 # Config
 
-DEFAULT_DATA_DIR    = Path(__file__).parent / "data"
+DEFAULT_DATA_DIR    = Path(__file__).parent.parent / "data"
 DEFAULT_INVESTMENT  = 100_000
-RESEARCH_DIR        = Path(__file__).parent / "Research"
+RESEARCH_DIR        = Path(__file__).parent.parent / "Research"
 INDEX_HISTORY_PATH  = DEFAULT_DATA_DIR / "index" / "nepse" / "history.csv"
 SHAVE_FRACTION      = 0.15
 NAMES_PATH          = DEFAULT_DATA_DIR / "company_names.json"
