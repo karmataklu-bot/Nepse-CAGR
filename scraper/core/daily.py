@@ -1,8 +1,12 @@
+import fcntl
 import logging
 import argparse
+import sys
 import time
 import json
 from pathlib import Path
+
+LOCK_FILE = "/tmp/nepse_daily_scraper.lock"
 
 from .history import ShareSansarHistoryScraper
 from .ipo_listing import ShareSansarIPO_listingScraper
@@ -113,6 +117,21 @@ class DailyScraperManager:
         :param force_full:     Force full re-scrape of prices.
         :param priority_only:  Use company_list.json filter (always True in practice).
         """
+        lock_fh = open(LOCK_FILE, 'w')
+        try:
+            fcntl.flock(lock_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            logger.error("Another instance is already running (lock held on %s). Exiting.", LOCK_FILE)
+            lock_fh.close()
+            sys.exit(1)
+
+        try:
+            self._run_daily_update_inner(check_new_only=check_new_only, force_full=force_full, priority_only=priority_only)
+        finally:
+            fcntl.flock(lock_fh, fcntl.LOCK_UN)
+            lock_fh.close()
+
+    def _run_daily_update_inner(self, check_new_only=False, force_full=False, priority_only=True):
         logger.info("=== Daily Update Started ===")
 
         target = self.get_priority_companies()

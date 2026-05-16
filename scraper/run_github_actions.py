@@ -116,11 +116,17 @@ def append_to_csv(filepath: Path, fieldnames: list, rows: list):
 
 
 def overwrite_csv(filepath: Path, fieldnames: list, rows: list):
-    """Write/overwrite a CSV with the given rows."""
-    with open(filepath, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(rows)
+    """Write/overwrite a CSV atomically via temp file + rename."""
+    tmp = filepath.with_suffix(".tmp")
+    try:
+        with open(tmp, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+            writer.writeheader()
+            writer.writerows(rows)
+        tmp.rename(filepath)
+    except Exception:
+        tmp.unlink(missing_ok=True)
+        raise
 
 
 # ═══════════════════════════════════════════════════════════════════════════
