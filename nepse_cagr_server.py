@@ -3,157 +3,150 @@
 """
 nepse_cagr_server.py — Local HTTP server for NEPSE CAGR Extension
 Runs on localhost:5758, accepts CAGR calculation requests from the browser extension.
+
+POST /cagr
+  Body: {"symbol": "NABIL", "years": 5}
+     or {"symbol": "NABIL", "start_date": "2020-01-01"}
+  Optional: {"end_date": "2023-01-01", "investment": 200000}
+  Response: cagr result dict or {"error": "..."}
+
+GET /ping
+  Response: {"status": "ok"}
 """
 
-import json, os, sys, re
+import errno
+import json
+import re
+import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+# ── Import core calculation from nepse_cagr.py ───────────────────────────────
+sys.path.insert(0, str(Path(__file__).parent))
+from nepse_cagr import (
+    calculate_cagr as _core_calculate_cagr,
+    load_dividends,
+    load_right_shares,
+    FACE_VALUE,
+    DAYS_PER_YEAR,
+)
 
 import pandas as pd
 
 # ── Config ────────────────────────────────────────────────────────────────────
-PORT       = 5758
-FACE_VALUE = 100
+PORT               = 5758
 DEFAULT_INVESTMENT = 100_000
-DATA_DIR   = Path(__file__).parent / "data"
+DATA_DIR           = Path(__file__).parent / "data"
+
+# NEPSE symbols are 1-15 uppercase alphanumeric characters.
+# Validated before any filesystem access to prevent path traversal.
+_SYMBOL_RE = re.compile(r'^[A-Z0-9]{1,15}$')
 
 
-# ── Data loading ──────────────────────────────────────────────────────────────
-def load_prices(symbol: str) -> pd.DataFrame:
-    path = DATA_DIR / "company-wise" / symbol.upper() / "prices.csv"
-    if not path.exists():
-        raise FileNotFoundError(f"prices.csv not found for {symbol}")
-    df = pd.read_csv(path, parse_dates=["date"])
-    df.sort_values("date", inplace=True)
-    df.reset_index(drop=True, inplace=True)
-    if "ltp" in df.columns and "close" not in df.columns:
-        df = df.rename(columns={"ltp": "close"})
-    return df
+# ── Events list builder (server-only, for extension UI display) ───────────────
+def _build_events(symbol: str, initial_units: float,
+                  actual_start: date, effective_end: date) -> list:
+    """
+    Reconstruct the chronological corporate-action event list for a symbol.
+    Tracks running unit count so every event carries a valid units_after float.
+    Used only by the extension popup for display — not part of CAGR maths.
+    """
+    dividends = load_dividends(symbol, DATA_DIR)
+    rights    = load_right_shares(symbol, DATA_DIR)
 
-
-def load_dividends(symbol: str) -> pd.DataFrame:
-    path = DATA_DIR / "company-wise" / symbol.upper() / "dividend.csv"
-    if not path.exists():
-        return pd.DataFrame(columns=["fiscal_year", "bonus_share", "cash_dividend", "total_dividend", "book_closure_date"])
-    df = pd.read_csv(path)
-    df["book_closure_date"] = df["book_closure_date"].astype(str).str.extract(r"(\d{4}-\d{2}-\d{2})", expand=False)
-    df["book_closure_date"] = pd.to_datetime(df["book_closure_date"], format="%Y-%m-%d", errors="coerce")
-    df.sort_values("book_closure_date", inplace=True)
-    df.reset_index(drop=True, inplace=True)
-    for col in ["bonus_share", "cash_dividend", "total_dividend"]:
-        if col in df.columns:
-            df[col] = (
-                df[col].astype(str)
-                .str.replace("%", "", regex=False)
-                .str.replace(",", "", regex=False)
-                .str.strip()
-                .replace("", "0").replace("nan", "0")
-                .astype(float) / 100.0
-            )
-    return df
-
-
-def nearest_price(prices: pd.DataFrame, target_date: date, direction: str = "forward") -> pd.Series:
-    prices_dates = prices["date"].dt.date
-    if direction == "forward":
-        mask = prices_dates >= target_date
-        subset = prices[mask]
-        if subset.empty:
-            subset = prices
-        return subset.iloc[0]
-    else:
-        mask = prices_dates <= target_date
-        subset = prices[mask]
-        if subset.empty:
-            subset = prices
-        return subset.iloc[-1]
-
-
-# ── CAGR calculation ──────────────────────────────────────────────────────────
-def calculate_cagr(symbol: str, start_date: date, initial_investment: float, end_date: date = None) -> dict:
-    today = date.today()
-    effective_end = end_date if end_date and end_date < today else today
-    if start_date >= effective_end:
-        return {"error": "Start date must be before end date."}
-
-    try:
-        prices = load_prices(symbol)
-    except FileNotFoundError as e:
-        return {"error": str(e)}
-
-    dividends = load_dividends(symbol)
-
-    # Initial purchase
-    start_row = nearest_price(prices, start_date, direction="forward")
-    actual_start_date = start_row["date"].date()
-    start_price = float(start_row["close"])
-    units = initial_investment / start_price
-
-    # Corporate actions — collect events for display
-    total_cash_dividends = 0.0
-    events = []
-
+    actions = []
     for _, row in dividends.iterrows():
         action_date = row["book_closure_date"]
         if pd.isna(action_date):
             continue
         action_date = action_date.date()
-        if action_date <= actual_start_date or action_date > effective_end:
+        if action_date <= actual_start or action_date > effective_end:
             continue
+        actions.append((action_date, "dividend", row))
 
-        bonus_pct = float(row.get("bonus_share", 0) or 0)
-        cash_pct  = float(row.get("cash_dividend", 0) or 0)
-        fiscal_yr = str(row.get("fiscal_year", ""))
+    for _, row in rights.iterrows():
+        action_date = row["closing_date"]
+        if pd.isna(action_date):
+            continue
+        action_date = action_date.date()
+        if action_date <= actual_start or action_date > effective_end:
+            continue
+        actions.append((action_date, "right", row))
 
-        if bonus_pct > 0:
-            units += units * bonus_pct
+    actions.sort(key=lambda x: x[0])
+
+    units  = initial_units
+    events = []
+
+    for action_date, action_type, row in actions:
+        if action_type == "right":
+            ratio_multiplier = float(row.get("ratio_multiplier", 0) or 0)
+            units += units * ratio_multiplier
             events.append({
-                "date": str(action_date),
-                "type": "bonus",
-                "pct": bonus_pct,
-                "fiscal_year": fiscal_yr,
+                "date":        str(action_date),
+                "type":        "right",
+                "ratio":       str(row.get("ratio", "")),
+                "issue_price": float(row.get("issue_price", 0)),
+                "pct":         0,
+                "fiscal_year": "",
                 "units_after": round(units, 4),
-                "cash_rs": 0
+                "cash_rs":     0,
             })
+        elif action_type == "dividend":
+            bonus_pct = float(row.get("bonus_share", 0) or 0)
+            cash_pct  = float(row.get("cash_dividend", 0) or 0)
+            fiscal_yr = str(row.get("fiscal_year", ""))
+            # Cash is paid on pre-bonus units (matching nepse_cagr.py ordering)
+            if cash_pct > 0:
+                cash_rs = round(units * FACE_VALUE * cash_pct, 2)
+                events.append({
+                    "date":        str(action_date),
+                    "type":        "cash",
+                    "pct":         cash_pct,
+                    "fiscal_year": fiscal_yr,
+                    "units_after": round(units, 4),
+                    "cash_rs":     cash_rs,
+                })
+            if bonus_pct > 0:
+                units += units * bonus_pct
+                events.append({
+                    "date":        str(action_date),
+                    "type":        "bonus",
+                    "pct":         bonus_pct,
+                    "fiscal_year": fiscal_yr,
+                    "units_after": round(units, 4),
+                    "cash_rs":     0,
+                })
 
-        if cash_pct > 0:
-            cash_rs = units * FACE_VALUE * cash_pct
-            total_cash_dividends += cash_rs
-            events.append({
-                "date": str(action_date),
-                "type": "cash",
-                "pct": cash_pct,
-                "fiscal_year": fiscal_yr,
-                "units_after": round(units, 4),
-                "cash_rs": round(cash_rs, 2)
-            })
+    return events
 
-    # Value at effective_end
-    latest_row  = nearest_price(prices, effective_end, direction="backward")
-    latest_date = latest_row["date"].date()
-    ltp         = float(latest_row["close"])
-    market_value = units * ltp
-    todays_value = market_value + total_cash_dividends
-    years = (latest_date - actual_start_date).days / 365.25
-    cagr  = (todays_value / initial_investment) ** (1 / years) - 1
 
-    return {
-        "symbol":               symbol.upper(),
-        "start_date":           str(actual_start_date),
-        "end_date":             str(latest_date),
-        "years":                round(years, 4),
-        "initial_investment":   initial_investment,
-        "start_price":          start_price,
-        "units_bought":         round(initial_investment / start_price, 4),
-        "total_units_today":    round(units, 4),
-        "ltp":                  ltp,
-        "market_value":         round(market_value, 2),
-        "total_cash_dividends": round(total_cash_dividends, 2),
-        "todays_value":         round(todays_value, 2),
-        "cagr_pct":             round(cagr * 100, 2),
-        "events":               events,
-    }
+# ── Server-facing CAGR wrapper ────────────────────────────────────────────────
+def calculate_cagr(symbol: str, start_date: date,
+                   initial_investment: float, end_date: date = None) -> dict:
+    """
+    Thin wrapper around nepse_cagr.calculate_cagr().
+    Adds 'events' list for the extension UI. Returns error dict on failure.
+    """
+    today         = date.today()
+    effective_end = end_date if (end_date and end_date < today) else today
+
+    try:
+        result = _core_calculate_cagr(
+            symbol=symbol,
+            start_date=start_date,
+            initial_investment=initial_investment,
+            data_dir=DATA_DIR,
+            verbose=False,
+            end_date=effective_end,
+        )
+    except (FileNotFoundError, ValueError) as e:
+        return {"error": str(e)}
+
+    actual_start = result["start_date"]  # date object from core
+    result["events"] = _build_events(symbol, result["units_bought"], actual_start, effective_end)
+    return result
 
 
 # ── HTTP Handler ──────────────────────────────────────────────────────────────
@@ -163,7 +156,7 @@ class Handler(BaseHTTPRequestHandler):
         pass  # Silence request logs
 
     def _send_json(self, data, status=200):
-        body = json.dumps(data).encode("utf-8")
+        body = json.dumps(data, default=str).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
@@ -186,8 +179,11 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        length = int(self.headers.get("Content-Length", 0))
-        body   = json.loads(self.rfile.read(length).decode("utf-8")) if length else {}
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+        except (TypeError, ValueError):
+            length = 0
+        body = json.loads(self.rfile.read(length).decode("utf-8")) if length else {}
 
         if self.path == "/cagr":
             symbol     = body.get("symbol", "").strip().upper()
@@ -195,8 +191,8 @@ class Handler(BaseHTTPRequestHandler):
             years      = body.get("years")
             start_date_str = body.get("start_date")
 
-            if not symbol:
-                self._send_json({"error": "No symbol provided."})
+            if not symbol or not _SYMBOL_RE.match(symbol):
+                self._send_json({"error": "Invalid symbol. Use letters and digits only (e.g. NABIL)."})
                 return
 
             if start_date_str:
@@ -206,7 +202,7 @@ class Handler(BaseHTTPRequestHandler):
                     self._send_json({"error": "Invalid start_date format. Use YYYY-MM-DD."})
                     return
             elif years:
-                start_date = date.today() - timedelta(days=int(float(years) * 365.25))
+                start_date = date.today() - timedelta(days=int(float(years) * DAYS_PER_YEAR))
             else:
                 self._send_json({"error": "Provide either years or start_date."})
                 return
@@ -230,13 +226,14 @@ class Handler(BaseHTTPRequestHandler):
 # ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     server = None
+    bound_port = PORT
     for p in range(PORT, PORT + 10):
         try:
-            server = HTTPServer(("localhost", p), Handler)
-            PORT = p
+            server = ThreadingHTTPServer(("localhost", p), Handler)
+            bound_port = p
             break
         except OSError as e:
-            if e.errno == 48:
+            if e.errno == errno.EADDRINUSE:
                 continue
             raise
 
@@ -244,5 +241,5 @@ if __name__ == "__main__":
         print(f"❌ Could not bind to any port in range {PORT}-{PORT+9}")
         sys.exit(1)
 
-    print(f"✅ NEPSE CAGR Server running on http://localhost:{PORT}")
+    print(f"✅ NEPSE CAGR Server running on http://localhost:{bound_port}")
     server.serve_forever()

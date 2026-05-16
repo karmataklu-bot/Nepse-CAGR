@@ -39,7 +39,7 @@ def find_port():
         try:
             urllib.request.urlopen(f"http://localhost:{p}/ping", timeout=0.5)
             return p
-        except:
+        except (OSError, urllib.error.URLError):
             continue
     return None
 

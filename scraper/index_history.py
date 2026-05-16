@@ -149,7 +149,8 @@ def scrape_index(index_name, from_date, to_date, session, delay=1.5, debug=False
     chunk_start = start
 
     while chunk_start <= end:
-        # Server silently returns 0 rows for ranges >= 31 days
+        # ShareSansar silently returns 0 rows for date ranges >= 31 days.
+        # Keep chunks to 29 days to stay within the server's undocumented limit.
         chunk_end = min(chunk_start + timedelta(days=29), end)
 
         params = {
